@@ -34,9 +34,9 @@ model = load_model()
 st.title("The Model")
 st.header("Using the Yolov12 provided by our professor, we trained the model to help detect the cells in a leukemia blood smear.")
 test_image = st.file_uploader("", type=["jpg", "jpeg", "png",]) #this is to upload a image file
-with st.align("center"):
- st.write("Please make sure that the image is at least 768 x 768 and above")
- st.write("The image you uploaded will appear below\n")
+
+st.markdown("<p style='text-align: center;'>Please make sure that the image is at least 768 x 768 and above</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center;'>The image you uploaded will appear below\n</p>", unsafe_allow_html=True)
 
 
 ########################### DETECT AND OUTPUT ##########################
