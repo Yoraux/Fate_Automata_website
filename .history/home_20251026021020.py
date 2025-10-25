@@ -5,19 +5,22 @@ from ultralytics import YOLO
 import time
 from style import load_style
 
-st.set_page_config(
-    page_title="Model",
-    page_icon="🧫",
-    layout="centered"
-)
+
+st.set_page_config(page_title="Home", page_icon="🧫", layout="centered")
 
 load_style() # to call the style.py
 
 
 
-
-
-
+ # HOME PAGE ============================================================================================#
+st.markdown(
+        """
+        <h1 style='text-align: center;'>Acute Lymphoblastic Leukemia Detection using YOLOv12</h1>
+        <h3>  <h3>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 
 # MODEL PAGE ============================================================================================#
@@ -28,11 +31,12 @@ def load_model():
 model = load_model()
 
 
-st.title("The model")
-st.header("Using Yolov12 provided by our professor, we trained the model to help detect the cells in a leukemia blood smear")
+st.title("The Model")
+st.header("Using the Yolov12 provided by our professor, we trained the model to help detect the cells in a leukemia blood smear.")
 test_image = st.file_uploader("", type=["jpg", "jpeg", "png",]) #this is to upload a image file
-st.write("Please make sure that the image is at least 768 x 768 and above")
-st.write("The image you uploaded will appear below\n")
+with st.align("center"):
+ st.write("Please make sure that the image is at least 768 x 768 and above")
+ st.write("The image you uploaded will appear below\n")
 
 
 ########################### DETECT AND OUTPUT ##########################
@@ -63,3 +67,25 @@ if test_image is not None:
     unique_labels = [model.names[int(i)] for i in set(names)]
     st.write(unique_labels)
 
+
+
+st.write(" ")
+st.write(" ")
+st.write(" ")
+st.write(" ")
+st.info("Use the sidebar on the left to navigate between pages.")
+
+
+
+
+# NOTES:
+# To make a new page just make a new .py file and make sure to put it in the "pages" folder, and also make sure to number it correctly 
+# for example:
+# 3_About us
+
+
+
+# References:
+# https://www.geeksforgeeks.org/python/a-beginners-guide-to-streamlit/
+# https://docs.streamlit.io/develop
+# https://docs.streamlit.io/develop/api-reference

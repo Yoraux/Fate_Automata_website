@@ -17,22 +17,63 @@ st.markdown(
         """
         <h1 style='text-align: center;'>Acute Lymphoblastic Leukemia Detection using YOLOv12</h1>
         <h3>  <h3>
-        <hr style='margin-top: -10px; margin-bottom: 20px;'>
-        <h3 style='text-align: center;'>By Group Fate/Automata of CSS181-2 AM2</h3>
-        <div style='text-align: center; font-size: 18px; line-height: 1.8;'>
-            Chang, Dash Michael<br>
-            Cortes, Juan Diego<br>
-            Herrera, Kael Lorenzo<br>
-            San Miguel, Ian Rafael
         </div>
         """,
         unsafe_allow_html=True
     )
+
+
+# MODEL PAGE ============================================================================================#
+########################## UPLOAD FILE ##########################
+@st.cache_resource
+def load_model():
+    return YOLO("yolov12/best.pt") #this is the model itself. In our case Train3 or version 3's best.pt was picked since it scored 93% 
+model = load_model()
+
+
+st.title("The Model")
+st.header("Using the Yolov12 provided by our professor, we trained the model to help detect the cells in a leukemia blood smear.")
+test_image = st.file_uploader("", type=["jpg", "jpeg", "png",]) #this is to upload a image file
+with st.align("center"):
+ st.write("Please make sure that the image is at least 768 x 768 and above")
+ st.write("The image you uploaded will appear below\n")
+
+
+########################### DETECT AND OUTPUT ##########################
+if test_image is not None:
+    image = Image.open(test_image)
+    st.image(image, caption="Uploaded Image", use_container_width=True)
+
+    progress_text = "Running detection, please wait..."
+    my_bar = st.progress(0, text=progress_text)
+    for percent_complete in range(100):
+            time.sleep(0.03)  # this is where to change how long the progress bar loads. 0.01 = 1 second
+            my_bar.progress(percent_complete + 1, text=progress_text) 
+        #This is a simple progress bar from: https://docs.streamlit.io/develop/api-reference/status/st.progress
+        #It's just here to add some flair or "life" to the website
+        #Right now It is actually not tied to how long the model predicts. There is a set timer for how long the progress bar loads, which is 3 seconds.
+
+
+        #!!!DISCLAIMER!!!
+        #for this part AI (Chatgpt) was used to help with the code with the prompt "How do I load my model into streamlit?
+    results = model.predict(image, imgsz=768, conf=0.5) # prediction starts
+    my_bar.empty() # Removes the progress bar when done
+
+    res_plotted = results[0].plot() # Display results
+    st.image(res_plotted, caption="Detection Result", use_container_width=True)
+
+    st.subheader("Detected Classes:")
+    names = results[0].boxes.cls.tolist()
+    unique_labels = [model.names[int(i)] for i in set(names)]
+    st.write(unique_labels)
+
+
+
 st.write(" ")
 st.write(" ")
 st.write(" ")
 st.write(" ")
-st.info("Use the sidebar on the left to navigate between pages (Model Prediction, Documentation, About, etc.)")
+st.info("Use the sidebar on the left to navigate between pages.")
 
 
 
