@@ -32,8 +32,8 @@ def load_model():
 model = load_model()
 
 
-st.title("The Model")
-st.header("Using the Yolov12 provided by our professor, we trained the model to help detect the cells in a leukemia blood smear.")
+st.title("Detect cells in a Leukemia blood smear.")
+
 test_image = st.file_uploader("", type=["jpg", "jpeg", "png",]) #this is to upload a image file
 
 st.markdown("<p style='text-align: center;'>Please make sure that the image is at least 768 x 768 and above</p>", unsafe_allow_html=True)
