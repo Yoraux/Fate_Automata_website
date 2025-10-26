@@ -52,6 +52,8 @@ st.write("""
 
 - The **YOLOv12** model was trained a total of **six times**. The dataset was annotated using **Roboflow** and went through **four versions** during development.
 
+- This version of YOLOv12 was modified and provided to us by **Dr. Lysa Comia** for this specific project.
+
 - **First Training (v1):**  
   The first version of the dataset (**v1**) contained **4,458 images**, split into **72% training**, **14% validation**, and **14% testing**.  
   Preprocessing included **auto-orientation** and **resizing to 640×640**, with augmentation of **blur up to 2 px**.  
