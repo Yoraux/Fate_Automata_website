@@ -15,6 +15,7 @@ load_style() # to call the style.py
  # HOME PAGE ============================================================================================#
 st.markdown(
         """
+        <div>
         <h1 style='text-align: center;'>Acute Lymphoblastic Leukemia Detection using YOLOv12</h1>
         <h3>  <h3>
         </div>
